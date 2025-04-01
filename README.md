@@ -71,6 +71,8 @@ jenkins-plugin-cli --plugins nodejs:1.6.4
 ### 3.3 Instalación manual:
 Descarga la versión requerida del plugin y cárgala manualmente en el controlador de Jenkins.
 
+### 3.4 Configuracion:
+
 Para más detalles sobre la configuración avanzada, visita la documentación oficial del plugin de NodeJS. https://plugins.jenkins.io/nodejs/
 
 ## 5. Instalación y Configuración de Ngrok
