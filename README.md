@@ -14,14 +14,12 @@ git clone https://github.com/tu-usuario/nodejs-helloworld-api.git
 cd nodejs-helloworld-api
 ```
 
-### 1.3. Configurar Git (Opcional, si no está configurado)
+### 1.3. Configurar Git
 
 ```bash
 git config --global user.name "Tu Nombre"
 git config --global user.email "tu@email.com"
 ```
-
-# NodeJS App en Jenkinsfile
 
 ## 2. Instalación de Node.js y NVM
 
