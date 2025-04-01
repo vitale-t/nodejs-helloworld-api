@@ -14,13 +14,6 @@ git clone https://github.com/tu-usuario/nodejs-helloworld-api.git
 cd nodejs-helloworld-api
 ```
 
-### 1.3. Configurar Git
-
-```bash
-git config --global user.name "Tu Nombre"
-git config --global user.email "tu@email.com"
-```
-
 ## 2. Instalación de Node.js y NVM
 
 Node.js es un entorno de ejecución de JavaScript de código abierto y multiplataforma. Para gestionar múltiples versiones de Node.js, utilizamos NVM (Node Version Manager).
@@ -77,6 +70,8 @@ jenkins-plugin-cli --plugins nodejs:1.6.4
 
 ### 3.3 Instalación manual:
 Descarga la versión requerida del plugin y cárgala manualmente en el controlador de Jenkins.
+
+Para más detalles sobre la configuración avanzada, visita la documentación oficial del plugin de NodeJS. https://plugins.jenkins.io/nodejs/
 
 ## 5. Instalación y Configuración de Ngrok
 
