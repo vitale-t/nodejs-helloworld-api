@@ -92,7 +92,6 @@ Se mostrará una línea como:
 ```sh
 Forwarding https://abc123.ngrok.io -> http://localhost:8080
 ```
-Esta URL (https://abc123.ngrok.io) se usará en el webhook de GitHub.
 
 ## 5. Configurar GitHub Webhook
 Para iniciar automáticamente un job en Jenkins cada vez que se realice un push o se cree un pull request:
