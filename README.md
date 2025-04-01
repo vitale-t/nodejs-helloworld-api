@@ -51,6 +51,7 @@ node -v # Debería mostrar "v18.20.8"
 nvm current # Debería mostrar "v18.20.8"
 npm -v # Debería mostrar "10.8.2"
 ```
+Para mayor informacion, "https://nodejs.org/es/download", y "https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating"
 
 ---
 
