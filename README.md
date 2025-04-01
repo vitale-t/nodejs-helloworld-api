@@ -21,43 +21,13 @@ git config --global user.name "Tu Nombre"
 git config --global user.email "tu@email.com"
 ```
 
-## 2. Instalación de Node.js
+# NodeJS App en Jenkinsfile
 
-Node.js es un entorno de ejecución de JavaScript de código abierto y multiplataforma.
+## 2. Instalación de Node.js y NVM
+
+Node.js es un entorno de ejecución de JavaScript de código abierto y multiplataforma. Para gestionar múltiples versiones de Node.js, utilizamos NVM (Node Version Manager).
 
 ### 2.1 Descargar e instalar NVM:
-```sh
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash
-```
-
-### 2.2 Activar NVM sin reiniciar la terminal:
-```sh
-\. "$HOME/.nvm/nvm.sh"
-```
-
-### 2.3 Descargar e instalar Node.js:
-```sh
-nvm install 18
-```
-
-### 2.4 Verificar la versión de Node.js:
-```sh
-node -v # Debería mostrar "v18.20.8"
-nvm current # Debería mostrar "v18.20.8"
-```
-
-### 2.5 Verificar la versión de npm:
-```sh
-npm -v # Debería mostrar "10.8.2"
-```
-
----
-
-## 3. Instalación de NVM (Node Version Manager)
-
-NVM permite instalar y utilizar diferentes versiones de Node.js desde la línea de comandos.
-
-### 3.1 Instalación y actualización:
 Para instalar o actualizar NVM, ejecuta uno de los siguientes comandos:
 
 ```sh
@@ -74,23 +44,40 @@ Estos comandos descargan un script que clona el repositorio de NVM en `~/.nvm` y
 
 Si la instalación afecta el archivo de perfil incorrecto, establece la variable de entorno `$PROFILE` con la ruta del archivo de perfil adecuado antes de ejecutar el script nuevamente.
 
+### 2.2 Activar NVM sin reiniciar la terminal:
+```sh
+\. "$HOME/.nvm/nvm.sh"
+```
+
+### 2.3 Descargar e instalar Node.js:
+```sh
+nvm install 18
+```
+
+### 2.4 Verificar la versión de Node.js y npm:
+```sh
+node -v # Debería mostrar "v18.20.8"
+nvm current # Debería mostrar "v18.20.8"
+npm -v # Debería mostrar "10.8.2"
+```
+
 ---
 
-## 4. Instalación del plugin de NodeJS en Jenkins
+## 3. Instalación del plugin de NodeJS en Jenkins
 
 Este plugin proporciona integración de Jenkins con NodeJS y npm.
 
-### 4.1 Instalación a través de la interfaz gráfica:
+### 3.1 Instalación a través de la interfaz gráfica:
 1. Desde el panel de Jenkins, ve a **Administrar Jenkins > Administrar plugins**.
 2. Selecciona la pestaña **Disponibles**.
 3. Busca "nodejs" y selecciona el plugin para instalarlo.
 
-### 4.2 Instalación usando la CLI:
+### 3.2 Instalación usando la CLI:
 ```sh
 jenkins-plugin-cli --plugins nodejs:1.6.4
 ```
 
-### 4.3 Instalación manual:
+### 3.3 Instalación manual:
 Descarga la versión requerida del plugin y cárgala manualmente en el controlador de Jenkins.
 
 ## 5. Instalación y Configuración de Ngrok
