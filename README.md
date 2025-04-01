@@ -1,105 +1,151 @@
 # NodeJS App en Jenkinsfile
 
+Este repositorio contiene una API simple de Node.js como demostración para la integración continua con Jenkins y GitHub Webhooks.
+
 ## 1. Configuración de GitHub
 
 ### 1.1. Crear un Fork del Repositorio
-
-1. Ir a [https://github.com/yosoyfunes/nodejs-helloworld-api](https://github.com/yosoyfunes/nodejs-helloworld-api)
+1. Ir a https://github.com/yosoyfunes/nodejs-helloworld-api.
 2. Hacer clic en "Fork" (creará una copia en tu cuenta de GitHub).
 
 ### 1.2. Clonar el Repositorio Localmente
-
-```bash
+```sh
 git clone https://github.com/tu-usuario/nodejs-helloworld-api.git
 cd nodejs-helloworld-api
 ```
 
 ## 2. Instalación de Node.js y NVM
 
-Node.js es un entorno de ejecución de JavaScript de código abierto y multiplataforma. Para gestionar múltiples versiones de Node.js, utilizamos NVM (Node Version Manager).
+Node.js es un entorno de ejecución de JavaScript de código abierto y multiplataforma. Para gestionar múltiples versiones de Node.js, utilizamos Node Version Manager.
 
-### 2.1 Descargar e instalar NVM:
-Para instalar o actualizar NVM, ejecuta uno de los siguientes comandos:
+### 2.1 Descargar e instalar Node Version Manager
+Para instalar o actualizar Node Version Manager, ejecuta uno de los siguientes comandos:
 
 ```sh
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash
 ```
-
-O utilizando `wget`:
-
+O utilizando wget:
 ```sh
 wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash
 ```
 
-Estos comandos descargan un script que clona el repositorio de NVM en `~/.nvm` y agrega las líneas de configuración necesarias en el archivo de perfil correspondiente (`~/.bashrc`, `~/.bash_profile`, `~/.zshrc`, o `~/.profile`).
-
 Si la instalación afecta el archivo de perfil incorrecto, establece la variable de entorno `$PROFILE` con la ruta del archivo de perfil adecuado antes de ejecutar el script nuevamente.
 
-### 2.2 Activar NVM sin reiniciar la terminal:
+### 2.2 Activar Node Version Manager sin reiniciar la terminal
 ```sh
 \. "$HOME/.nvm/nvm.sh"
 ```
 
-### 2.3 Descargar e instalar Node.js:
+### 2.3 Descargar e instalar Node.js
 ```sh
 nvm install 18
 ```
 
-### 2.4 Verificar la versión de Node.js y npm:
+### 2.4 Verificar la versión de Node.js y Node Package Manager
 ```sh
 node -v # Debería mostrar "v18.20.8"
 nvm current # Debería mostrar "v18.20.8"
 npm -v # Debería mostrar "10.8.2"
 ```
-Para mayor informacion, "https://nodejs.org/es/download", y "https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating"
+Para más información, consulta:
+- https://nodejs.org/es/download
+- https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating
 
----
+## 3. Instalación del plugin de Node.js en Jenkins
 
-## 3. Instalación del plugin de NodeJS en Jenkins
+Este plugin proporciona integración de Jenkins con Node.js y Node Package Manager.
 
-Este plugin proporciona integración de Jenkins con NodeJS y npm.
-
-### 3.1 Instalación a través de la interfaz gráfica:
-1. Desde el panel de Jenkins, ve a **Administrar Jenkins > Administrar plugins**.
-2. Selecciona la pestaña **Disponibles**.
+### 3.1 Instalación a través de la interfaz gráfica
+1. Desde el panel de Jenkins, ve a Administrar Jenkins > Administrar plugins.
+2. Selecciona la pestaña Disponibles.
 3. Busca "nodejs" y selecciona el plugin para instalarlo.
 
-### 3.2 Instalación usando la CLI:
+### 3.2 Instalación usando la línea de comandos
 ```sh
 jenkins-plugin-cli --plugins nodejs:1.6.4
 ```
 
-### 3.3 Instalación manual:
+### 3.3 Instalación manual
 Descarga la versión requerida del plugin y cárgala manualmente en el controlador de Jenkins.
 
-### 3.4 Configuracion:
-
-Para más detalles sobre la configuración avanzada, visita la documentación oficial del plugin de NodeJS. https://plugins.jenkins.io/nodejs/
+### 3.4 Configuración
+Para más detalles sobre la configuración avanzada, visita la documentación oficial del plugin de Node.js en Jenkins: https://plugins.jenkins.io/nodejs/.
 
 ## 4. Instalación y Configuración de Ngrok
 
 Ngrok expone Jenkins a Internet para que GitHub pueda enviar webhooks.
 
-### 4.1. Descargar e instalar Ngrok:
-
-```bash
+### 4.1 Descargar e instalar Ngrok
+```sh
 wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz
 tar xvzf ngrok-v3-stable-linux-amd64.tgz
 sudo mv ngrok /usr/local/bin/
 ```
 
-### 4.2 Iniciar Ngrok para exponer Jenkins:
-
-```bash
+### 4.2 Iniciar Ngrok para exponer Jenkins
+```sh
 ngrok http 8080
 ```
 
-### 4.3 Obtener la URL pública:
-
+### 4.3 Obtener la URL pública
 Se mostrará una línea como:
-
-```
+```sh
 Forwarding https://abc123.ngrok.io -> http://localhost:8080
 ```
+Esta URL (https://abc123.ngrok.io) se usará en el webhook de GitHub.
 
-Esta URL (`https://abc123.ngrok.io`) se usará en el webhook de GitHub.
+## 5. Configurar GitHub Webhook
+Para iniciar automáticamente un job en Jenkins cada vez que se realice un push o se cree un pull request:
+1. Ir al repositorio en GitHub.
+2. Navegar a Configuración > Webhooks.
+3. Hacer clic en "Agregar webhook".
+4. En el campo "Payload URL", ingresar la URL pública del servicio de Jenkins (expuesta con Ngrok).
+5. Seleccionar el contenido "application/json".
+6. Configurar los eventos de disparo ("Solo el evento push" o "Déjame seleccionar eventos individuales").
+7. Guardar los cambios.
+
+Para más detalles, consultar la documentación oficial en https://docs.github.com/es/webhooks/about-webhooks.
+
+## 6. Configurar Jenkins Pipeline
+Crear un pipeline en Jenkins que ejecute los pasos necesarios para el desarrollo de la API.
+
+Ejemplo de archivo Jenkinsfile:
+```groovy
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/yosoyfunes/nodejs-helloworld-api.git'
+            }
+        }
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        stage('Run Tests') {
+            steps {
+                sh 'npm test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying application...'
+            }
+        }
+    }
+}
+```
+Para más información sobre el plugin de integración de GitHub en Jenkins, visita la documentación oficial en https://plugins.jenkins.io/github/.
+
+## 7. Documentación de Referencia
+| Título | Descripción | URL |
+|--------|-------------|-----|
+| Ngrok Developer Ingress | Permite exponer un servicio local hacia internet | https://ngrok.com/ |
+| GitHub Webhooks | Documentación oficial sobre los webhooks | https://docs.github.com/es/webhooks/about-webhooks |
+| Jenkins GitHub Plugin | Plugin utilizado para integrar Webhooks de GitHub a Jenkins | https://plugins.jenkins.io/github/ |
+| Instalar Node Version Manager para Node.js | Guía para instalar Node Version Manager en Linux | https://nodejs.org/en/download/package-manager |
+
+---
