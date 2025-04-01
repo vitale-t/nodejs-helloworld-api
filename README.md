@@ -76,11 +76,11 @@ Descarga la versión requerida del plugin y cárgala manualmente en el controlad
 
 Para más detalles sobre la configuración avanzada, visita la documentación oficial del plugin de NodeJS. https://plugins.jenkins.io/nodejs/
 
-## 5. Instalación y Configuración de Ngrok
+## 4. Instalación y Configuración de Ngrok
 
 Ngrok expone Jenkins a Internet para que GitHub pueda enviar webhooks.
 
-### 5.1. Descargar e instalar Ngrok:
+### 4.1. Descargar e instalar Ngrok:
 
 ```bash
 wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz
@@ -88,13 +88,13 @@ tar xvzf ngrok-v3-stable-linux-amd64.tgz
 sudo mv ngrok /usr/local/bin/
 ```
 
-### 5.2 Iniciar Ngrok para exponer Jenkins:
+### 4.2 Iniciar Ngrok para exponer Jenkins:
 
 ```bash
 ngrok http 8080
 ```
 
-### 5.3 Obtener la URL pública:
+### 4.3 Obtener la URL pública:
 
 Se mostrará una línea como:
 
@@ -103,9 +103,3 @@ Forwarding https://abc123.ngrok.io -> http://localhost:8080
 ```
 
 Esta URL (`https://abc123.ngrok.io`) se usará en el webhook de GitHub.
-
-## 6. Plugins Requeridos en Jenkins
-
-Instalar los siguientes plugins desde **Manage Jenkins** → **Manage Plugins** → **Available plugins**:
-
-- **NodeJS (nodejs-plugin)**
