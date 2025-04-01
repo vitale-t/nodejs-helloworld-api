@@ -106,36 +106,7 @@ Para iniciar automáticamente un job en Jenkins cada vez que se realice un push 
 
 Para más detalles, consultar la documentación oficial en https://docs.github.com/es/webhooks/about-webhooks.
 
-## 6. Configurar Jenkins Pipeline
-Crear un pipeline en Jenkins que ejecute los pasos necesarios para el desarrollo de la API.
-
-Ejemplo de archivo Jenkinsfile:
-```groovy
-pipeline {
-    agent any
-    tools {
-        nodejs 'nodejs'
-    }
-    stages {
-        stage('Build') {
-            steps {
-                echo "Ejecutar npm install" 
-                sh 'npm install'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                echo "Ejecutar npm test push" 
-                sh 'npm test'
-            }
-        }
-    }
-}
-```
-Para más información sobre el plugin de integración de GitHub en Jenkins, visita la documentación oficial en https://plugins.jenkins.io/github/.
-
-## 7. Documentación de Referencia
+## 6. Documentación de Referencia
 | Título | Descripción | URL |
 |--------|-------------|-----|
 | Ngrok Developer Ingress | Permite exponer un servicio local hacia internet | https://ngrok.com/ |
