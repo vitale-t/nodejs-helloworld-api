@@ -113,26 +113,21 @@ Ejemplo de archivo Jenkinsfile:
 ```groovy
 pipeline {
     agent any
-
+    tools {
+        nodejs 'nodejs'
+    }
     stages {
-        stage('Checkout') {
+        stage('Build') {
             steps {
-                git 'https://github.com/yosoyfunes/nodejs-helloworld-api.git'
-            }
-        }
-        stage('Install Dependencies') {
-            steps {
+                echo "Ejecutar npm install" 
                 sh 'npm install'
             }
         }
-        stage('Run Tests') {
+
+        stage('Test') {
             steps {
+                echo "Ejecutar npm test push" 
                 sh 'npm test'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying application...'
             }
         }
     }
