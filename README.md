@@ -1,8 +1,11 @@
 1. Requisitos de Sistema
 1.1. Hardware Mínimo
 CPU: 2 núcleos (4 recomendados para Jenkins)
+
 RAM: 4 GB (8 GB recomendados para entornos productivos)
+
 Disco: 50 GB de espacio libre (SSD recomendado)
+
 Sistema Operativo: Linux (Ubuntu 20.04/22.04 LTS recomendado) o macOS/Windows (con WSL2)
 
 2. Instalación de Dependencias
@@ -40,18 +43,19 @@ Verificar estado:
 bash
 Copy
 sudo systemctl status jenkins
-
 Acceso inicial:
+
 Abrir en navegador: http://localhost:8080
+
 Desbloquear Jenkins con la contraseña inicial:
 
 bash
 Copy
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
-
 3. Configuración de GitHub
 3.1. Crear un Fork del Repositorio
 Ir a https://github.com/yosoyfunes/nodejs-helloworld-api
+
 Hacer clic en "Fork" (creará una copia en tu cuenta de GitHub).
 
 3.2. Clonar el Repositorio Localmente
@@ -64,7 +68,6 @@ bash
 Copy
 git config --global user.name "Tu Nombre"
 git config --global user.email "tu@email.com"
-
 4. Instalación de Node.js (usando nvm)
 nvm (Node Version Manager) permite gestionar múltiples versiones de Node.js.
 Instalación de nvm:
@@ -110,45 +113,4 @@ Esta URL (https://abc123.ngrok.io) se usará en el webhook de GitHub.
 6. Plugins Requeridos en Jenkins
 Instalar los siguientes plugins desde Manage Jenkins → Manage Plugins → Available plugins:
 
-GitHub Integration (github-plugin)
-
 NodeJS (nodejs-plugin)
-
-Pipeline (workflow-aggregator)
-
-Git (git-plugin)
-
-GitHub API (github-api)
-
-7. Configuración de Jenkins para Node.js
-Configurar Node.js en Jenkins:
-
-Ir a Manage Jenkins → Global Tool Configuration
-
-Buscar NodeJS y hacer clic en "Add NodeJS"
-
-Nombre: nodejs (debe coincidir con el Jenkinsfile)
-
-Versión: Seleccionar la última LTS (ej. 18.x.x)
-
-Guardar.
-
-Configurar GitHub en Jenkins:
-
-Ir a Manage Jenkins → Configure System
-
-Buscar GitHub:
-
-GitHub Servers → Add GitHub Server
-
-API URL: https://api.github.com
-
-Credentials: None (si el repo es público) o configurar un Personal Access Token.
-
-8. Resumen de URLs y Credenciales Necesarias
-Componente	Configuración Requerida
-Jenkins URL	http://localhost:8080 (local) o https://[ngrok].ngrok.io (pública)
-GitHub Repo	https://github.com/tu-usuario/nodejs-helloworld-api
-Ngrok URL	https://abc123.ngrok.io (ejemplo)
-Webhook Endpoint	https://abc123.ngrok.io/github-webhook/
-Node.js Version	18.x.x (configurado en Jenkins Global Tools)
